@@ -9,7 +9,7 @@
     currentView: "entry",
     coachStepIndex: 0,
     openDiscoveryThemes: {
-      decouverte: 0,
+      decouverte: null,
     },
     openPatientSections: {
       contexte: true,
@@ -42,7 +42,6 @@
         ...parsed,
         openDiscoveryThemes: {
           ...defaultState.openDiscoveryThemes,
-          ...(parsed.openDiscoveryThemes || {}),
         },
         openPatientSections: {
           ...defaultState.openPatientSections,
@@ -95,7 +94,7 @@
       stepId
     )
       ? state.openDiscoveryThemes[stepId]
-      : 0;
+      : null;
   }
 
   function scrollCurrentViewToTop() {
