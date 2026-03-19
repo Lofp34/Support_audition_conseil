@@ -12,10 +12,10 @@
       decouverte: null,
     },
     openPatientSections: {
-      contexte: true,
-      gene: true,
+      contexte: false,
+      gene: false,
       ressenti: false,
-      spontane: true,
+      spontane: false,
       cache: false,
       objections: false,
       convaincre: false,
@@ -45,7 +45,6 @@
         },
         openPatientSections: {
           ...defaultState.openPatientSections,
-          ...(parsed.openPatientSections || {}),
         },
       };
     } catch (error) {
@@ -925,7 +924,13 @@
 
     if (action === "toggle-section") {
       const key = target.dataset.section;
-      state.openPatientSections[key] = !state.openPatientSections[key];
+      const isCurrentlyOpen = Boolean(state.openPatientSections[key]);
+
+      Object.keys(state.openPatientSections).forEach((sectionKey) => {
+        state.openPatientSections[sectionKey] = false;
+      });
+
+      state.openPatientSections[key] = !isCurrentlyOpen;
     }
 
     if (action === "go-step") {
